@@ -17,6 +17,8 @@ public class PlayerManager : NetworkBehaviour
 
     [SyncVar] public int deathScore;
 
+    [SyncVar] public int itemIndex;
+
 
     [SyncVar] public PlayerController playerController;
 

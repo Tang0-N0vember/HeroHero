@@ -126,8 +126,15 @@ public class PlayerController : NetworkBehaviour, IDamageable
             items[previousItemIndex].itemGameObject.SetActive(false);
         }
         previousItemIndex = itemIndex;
+
+        if (base.IsOwner)
+        {
+            PlayerManager.Instance.itemIndex = itemIndex;
+        }
         
     }
+    
+
     void SwitchItems()
     {
         for (int i = 0; i < items.Length; i++)

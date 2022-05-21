@@ -172,9 +172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797cfd2c036cd3a42b92af66fc8b9717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 0
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 4928400310430352814}
-  _networkObjectCache: {fileID: 8652633103793671717}
+  _networkObjectCache: {fileID: 4928400310430352814}
 --- !u!114 &8652633103793671717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     LocalScale: {x: 1, y: 1, z: 1}
   _isNetworked: 1
-  _hasParentNetworkObjectAtEdit: 0
+  _hasParentNetworkObjectAtEdit: 1
 --- !u!1 &900419995380954710
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NetworkObserver: {fileID: 0}
-  _prefabId: -1
+  _prefabId: 2
   _scenePathHash: 0
   _sceneId: 0
   _sceneNetworkObjects:
@@ -530,7 +530,6 @@ MonoBehaviour:
   - {fileID: 5683172284599077606}
   - {fileID: 2774377742799027618}
   - {fileID: 8050604358867253827}
-  - {fileID: 0}
   - {fileID: 7523692041770431726}
   SceneTransformProperties:
     Position: {x: 0, y: 0, z: 0}
@@ -571,8 +570,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 4928400310430352814}
   _networkObjectCache: {fileID: 4928400310430352814}
-  healthbarImage: {fileID: 6812551426724150443}
-  hud: {fileID: 0}
+  playerManager: {fileID: 0}
   cameraHolder: {fileID: 1861776239337524563}
   mouseSensitivity: 3
   sprintSpeed: 6
@@ -1097,7 +1095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ebce11b8693bf144bd396ea70c12f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 7
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: 4928400310430352814}
   _networkObjectCache: {fileID: 4928400310430352814}
   _text: {fileID: 8754276560508804254}
@@ -1275,6 +1273,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8809678961568201579, guid: 8148dc1500ef2b64bbf6628205e3438f, type: 3}
+      propertyPath: _prefabId
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809678961568201579, guid: 8148dc1500ef2b64bbf6628205e3438f, type: 3}
       propertyPath: _hasParentNetworkObjectAtEdit
       value: 1
       objectReference: {fileID: 0}
@@ -1323,6 +1325,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4154101581506593156}
     m_Modifications:
+    - target: {fileID: 176327082035518954, guid: d210690be56e76c4f9f45f242894e2d8, type: 3}
+      propertyPath: _prefabId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 176327082035518954, guid: d210690be56e76c4f9f45f242894e2d8, type: 3}
       propertyPath: _hasParentNetworkObjectAtEdit
       value: 1
@@ -1445,6 +1451,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4319765361958587173, guid: ea5552abc04983f48a9db6dc40c6f973, type: 3}
+      propertyPath: _prefabId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4319765361958587173, guid: ea5552abc04983f48a9db6dc40c6f973, type: 3}
       propertyPath: _hasParentNetworkObjectAtEdit
       value: 1
       objectReference: {fileID: 0}
@@ -1522,11 +1532,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea5552abc04983f48a9db6dc40c6f973, type: 3}
---- !u!4 &1275210991389288623 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8450536121082791507, guid: ea5552abc04983f48a9db6dc40c6f973, type: 3}
-  m_PrefabInstance: {fileID: 7274474996298280700}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5683172284599077606 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3038398552453571610, guid: ea5552abc04983f48a9db6dc40c6f973, type: 3}
@@ -1538,3 +1543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b29e1be0df65c44c87038161c0fc643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1275210991389288623 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8450536121082791507, guid: ea5552abc04983f48a9db6dc40c6f973, type: 3}
+  m_PrefabInstance: {fileID: 7274474996298280700}
+  m_PrefabAsset: {fileID: 0}
