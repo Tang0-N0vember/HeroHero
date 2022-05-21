@@ -11,11 +11,11 @@ public class PlayerManager : NetworkBehaviour
 {
     public static PlayerManager Instance { get; private set; }
 
-    [SyncVar] string username;
+    [SyncVar] public string username;
 
-    [SyncVar] int killScore;
+    [SyncVar] public int killScore;
 
-    [SyncVar] int deathScore;
+    [SyncVar] public int deathScore;
 
 
     [SyncVar] public PlayerController playerController;
@@ -63,17 +63,23 @@ public class PlayerManager : NetworkBehaviour
         //InstanceFinder.ServerManager.Despawn(playerInstance);
 
     }
+    [ServerRpc]
+    public void ConfirmKill()
+    {
+        //killScore++;
+    }
+
 
     [TargetRpc]
     public void TargetPlayerKilled(NetworkConnection networkConnection)
     {
         
         
-        GameObject playerInstance = playerController.gameObject;
-        InstanceFinder.ServerManager.Despawn(playerInstance);
-        if(!networkConnection.IsActive)
-            killScore++;
-        Debug.Log(killScore);
+        PlayerController playerInstance = playerController;
+        
+        //InstanceFinder.ServerManager.Despawn(playerInstance.gameObject);
+        GameManager.Instance.ChangeDeathScoreForPlayer(OwnerId);
+        
         ServerSpawnPawn();
     }
 

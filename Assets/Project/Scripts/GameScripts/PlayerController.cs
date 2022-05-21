@@ -12,10 +12,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
 {
     [SyncVar] public PlayerManager playerManager;
 
-
-    //[SerializeField] Image healthbarImage;
-    //[SerializeField] GameObject hud;
-
     [SerializeField] GameObject cameraHolder;
 
     [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
@@ -186,11 +182,14 @@ public class PlayerController : NetworkBehaviour, IDamageable
         //RPC_TakeDamge(damage);
         //Debug.Log("took damage: " + damage);
 
-        if ((currentHealth -= damage) <= 0)
+        if ((currentHealth - damage) <= 0)
         {
-            if (playerId > -1)
+            if (playerId >=0)
             {
-                Debug.Log("Send message to: " + playerId);
+                //Debug.Log("Send message to: " + playerId);
+                GameManager.Instance.ChangeKillScoreForPlayer(playerId);
+                //Debug.Log(InstanceFinder.ClientManager.Clients[playerId].ClientId);
+                //InstanceFinder.ClientManager.Clients[playerId]
             }
         }
 
@@ -221,9 +220,13 @@ public class PlayerController : NetworkBehaviour, IDamageable
             Die();
         }
     }*/
+    //[ServerRpc]
     void Die()
     {
-        Debug.Log("Dead");
+        //Debug.Log("Dead");
         playerManager.TargetPlayerKilled(Owner);
+        
+        Despawn();
+        //Destroy(gameObject);
     }
 }

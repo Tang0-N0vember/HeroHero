@@ -15,15 +15,25 @@ public class GameManager : NetworkBehaviour
         Instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
+        //foreach(PlayerManager playerManager in playerManagers)
+        {
+            //Debug.Log("player: "+ playerManager.OwnerId +" K/D: "+ playerManager.killScore);
+            //Debug.Log($"player: {playerManager.OwnerId} K/D {playerManager.killScore}/{playerManager.deathScore}");
+        }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeKillScoreForPlayer(int playerID)
+    {
+        PlayerManager playerManager = playerManagers.Find(x => x.OwnerId == playerID);
+        playerManager.killScore++;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeDeathScoreForPlayer(int playerID)
+    {
+        PlayerManager playerManager = playerManagers.Find(x => x.OwnerId == playerID);
+        playerManager.deathScore++;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

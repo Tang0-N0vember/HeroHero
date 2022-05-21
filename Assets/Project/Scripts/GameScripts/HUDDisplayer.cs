@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HUDDisplayer : NetworkBehaviour
 {
     [SerializeField] Image healthbarImage;
+
+    [SerializeField] TMP_Text kdText;
 
     //bool isActive=false;
     // Start is called before the first frame update
@@ -28,5 +31,6 @@ public class HUDDisplayer : NetworkBehaviour
         }
 
         healthbarImage.fillAmount = PlayerManager.Instance.playerController.currentHealth / 100;//maxHealth;
+        kdText.text = $"{PlayerManager.Instance.killScore}/{PlayerManager.Instance.deathScore}" ;
     }
 }

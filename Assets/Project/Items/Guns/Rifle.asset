@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Rifle
   m_EditorClassIdentifier: 
   itemName: Rifle
-  damage: 50
+  damage: 10
   fireRate: 0.1
