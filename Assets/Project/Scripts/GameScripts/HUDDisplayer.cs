@@ -9,6 +9,9 @@ public class HUDDisplayer : NetworkBehaviour
 {
     [SerializeField] Image healthbarImage;
 
+    [SerializeField] GameObject playerHUD;
+    [SerializeField] GameObject ui;
+
     [SerializeField] TMP_Text kdText;
 
     //bool isActive=false;
@@ -26,11 +29,20 @@ public class HUDDisplayer : NetworkBehaviour
         PlayerManager playerManager = PlayerManager.Instance;
         if (playerManager == null || playerManager.playerController == null)
         {
-            //Debug.Log("no manger found");
+            playerHUD.SetActive(false);
             return;
         }
+        else
+        {
+            if(playerManager.playerController == null)
+            {
+                return;
+            }
+            playerHUD.SetActive(true);
 
-        healthbarImage.fillAmount = PlayerManager.Instance.playerController.currentHealth / 100;//maxHealth;
-        kdText.text = $"{PlayerManager.Instance.killScore}/{PlayerManager.Instance.deathScore}" ;
+            healthbarImage.fillAmount = PlayerManager.Instance.playerController.currentHealth / 100;//maxHealth;
+            kdText.text = $"{PlayerManager.Instance.killScore}/{PlayerManager.Instance.deathScore}";
+        }
+        
     }
 }

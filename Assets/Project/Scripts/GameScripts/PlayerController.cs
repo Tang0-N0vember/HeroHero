@@ -75,6 +75,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
             Die();
         }
     }
+
     void Move()
     {
         transform.Rotate(new Vector3(0, Input.GetAxisRaw("Mouse X") * mouseSensitivity));
@@ -87,10 +88,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 offset = new Vector3(horizontal, Physics.gravity.y, vertical) * walkSpeed;
+        Vector3 offset = new Vector3(horizontal,Physics.gravity.y, vertical) * walkSpeed;
         offset = transform.TransformDirection(offset);
 
-        ySpeed += Physics.gravity.y * Time.deltaTime;
+        ySpeed += Physics.gravity.y *  Time.deltaTime;
 
 
         if (_characterController.isGrounded)
@@ -209,31 +210,9 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     }
 
-    /*
-    [ServerRpc(RequireOwnership = false)]
-    private void RPC_TakeDamge(float damage)
-    {
-        //Debug.Log("took damage: " + damage);
-
-        if((currentHealth -= damage) <= 0)
-        {
-            
-        }
-
-        currentHealth -= damage;
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }*/
-    //[ServerRpc]
     void Die()
     {
-        //Debug.Log("Dead");
         playerManager.TargetPlayerKilled(Owner);
-        
         Despawn();
-        //Destroy(gameObject);
     }
 }
