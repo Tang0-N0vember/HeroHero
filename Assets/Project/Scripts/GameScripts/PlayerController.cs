@@ -10,9 +10,11 @@ using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour, IDamageable
 {
+    [SyncVar] public PlayerManager playerManager;
 
-    [SerializeField] Image healthbarImage;
-    [SerializeField] GameObject hud;
+
+    //[SerializeField] Image healthbarImage;
+    //[SerializeField] GameObject hud;
 
     [SerializeField] GameObject cameraHolder;
 
@@ -31,10 +33,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
     Vector3 moveAmount;
     CharacterController _characterController;
 
+
     const float maxHealth = 100f;
 
-    [SyncVar]
-    public float currentHealth = maxHealth;
+    [SyncVar] public float currentHealth = maxHealth;
 
 
     void Awake()
@@ -59,7 +61,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         }
         else
         {
-            Destroy(hud);
+            //Destroy(hud);
         }
     }
 
@@ -178,27 +180,50 @@ public class PlayerController : NetworkBehaviour, IDamageable
     }
 
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage,int playerId)
     {
-        Debug.Log("took damge: " + damage);
-        RPC_TakeDamge(damage);
-    }
-    [ServerRpc(RequireOwnership = false)]
-    private void RPC_TakeDamge(float damage)
-    {
-        Debug.Log("took damage: " + damage);
+        Debug.Log("took damge: " + damage+" from playerID: "+playerId);
+        //RPC_TakeDamge(damage);
+        //Debug.Log("took damage: " + damage);
+
+        if ((currentHealth -= damage) <= 0)
+        {
+            if (playerId > -1)
+            {
+                Debug.Log("Send message to: " + playerId);
+            }
+        }
 
         currentHealth -= damage;
-
-        healthbarImage.fillAmount = currentHealth / maxHealth;
 
         if (currentHealth <= 0)
         {
             Die();
         }
+
     }
+
+    /*
+    [ServerRpc(RequireOwnership = false)]
+    private void RPC_TakeDamge(float damage)
+    {
+        //Debug.Log("took damage: " + damage);
+
+        if((currentHealth -= damage) <= 0)
+        {
+            
+        }
+
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }*/
     void Die()
     {
         Debug.Log("Dead");
+        playerManager.TargetPlayerKilled(Owner);
     }
 }

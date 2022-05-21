@@ -33,7 +33,7 @@ public class ShotGun : Gun
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     RPC_Shoot(hit.point, hit.normal);
-                    hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(((ShotGunInfo)itemInfo).damage);
+                    //hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(((ShotGunInfo)itemInfo).damage,base.OwnerId);
                     //CreateTracer(hit.point);
                 }
                 else

@@ -11,7 +11,7 @@ public class RocketGun : Gun
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
 
-            hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(((SingleShotGunInfo)itemInfo).damage);
+            //hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(((SingleShotGunInfo)itemInfo).damage);
             RPC_Shoot(hit.point, hit.normal);
         }
     }

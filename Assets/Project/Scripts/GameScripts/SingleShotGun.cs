@@ -20,12 +20,23 @@ public class SingleShotGun : Gun
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(((SingleShotGunInfo)itemInfo).damage);
+                if (hit.collider.gameObject.GetComponent<IDamageable>() != null)
+                {
+                    RPC_ServerFire(hit.collider.gameObject);
+                }
+                //hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(((SingleShotGunInfo)itemInfo).damage,base.OwnerId);
                 RPC_Shoot(hit.point, hit.normal);
             }
             lastShootTime = Time.time;
         }
     }
+    [ServerRpc]
+    private void RPC_ServerFire(GameObject hitPlayer)
+    {
+        hitPlayer.GetComponent<IDamageable>().TakeDamage(((SingleShotGunInfo)itemInfo).damage, base.OwnerId);
+    }
+
+
     [ServerRpc]
     private void RPC_Shoot(Vector3 hitPosition, Vector3 hitNormal)
     {
